@@ -1,4 +1,4 @@
-import React from "react";
+import React, { use } from "react";
 import "../styles/main.css";
 import { logout } from "../redux/slices/authSlice";
 import { useDispatch, useSelector } from "react-redux";
@@ -15,10 +15,12 @@ function UserProfile()
         const auth = useSelector((state) => state.auth);
         console.log(auth);
         const navigate = useNavigate();
+        useEffect(() => {
        if (auth.user === null) {
          navigate("/");
          return null;
        }
+    }, [auth.user, navigate]);
 	return (
 		<>
 <body>
