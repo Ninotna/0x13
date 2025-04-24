@@ -1,11 +1,10 @@
-import React from "react";
-import "../styles/main.css";
+import React, { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { loginUser, getUserProfile } from "../redux/slices/authSlice";
+import { useNavigate, Link } from "react-router-dom";
 
-import logo from "../assets/img/argentBankLogo.png"
-// import treeImage from "../assets/img/bank-tree.jpeg";
-// import chatIcon from "../assets/img/icon-chat.png";
-// import moneyIcon from "../assets/img/icon-money.png";
-// import securityIcon from "../assets/img/icon-security.png";
+import "../styles/main.css";
+import logo from "../assets/img/argentBankLogo.png";
 
 /**
  * Page de connexion ArgentBank
@@ -14,69 +13,77 @@ import logo from "../assets/img/argentBankLogo.png"
  */
 function SignIn()
 {
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+
+	const { isAuthenticated, status, error } = useSelector((state) => state.auth);
+
+	useEffect(() =>
+	{
+		if (isAuthenticated)
+		{
+			dispatch(getUserProfile());
+			navigate("/profile");
+		}
+	}, [isAuthenticated, dispatch, navigate]);
+
+	const handleSubmit = (e) =>
+	{
+		e.preventDefault();
+		dispatch(loginUser({ email, password }));
+	};
+
 	return (
 		<>
-<body>
- <nav className="main-nav">
-  <a className="main-nav-logo" href="./index.html">
-   <img alt="Argent Bank Logo" className="main-nav-logo-image" src={logo}/>
-   <h1 className="sr-only">
-    Argent Bank
-   </h1>
-  </a>
-  <div>
-   <a className="main-nav-item" href="./sign-in.html">
-    <i className="fa fa-user-circle">
-    </i>
-    Sign In
-   </a>
-  </div>
- </nav>
- <main className="main bg-dark">
-  <section className="sign-in-content">
-   <i className="fa fa-user-circle sign-in-icon">
-   </i>
-   <h1>
-    Sign In
-   </h1>
-   <form>
-    <div className="input-wrapper">
-     <label for="username">
-      Username
-     </label>
-     <input id="username" type="text"/>
-    </div>
-    <div className="input-wrapper">
-     <label for="password">
-      Password
-     </label>
-     <input id="password" type="password"/>
-    </div>
-    <div className="input-remember">
-     <input id="remember-me" type="checkbox"/>
-     <label for="remember-me">
-      Remember me
-     </label>
-    </div>
-    <!-- PLACEHOLDER DUE TO STATIC SITE -->
-    <a className="sign-in-button" href="./user.html">
-     Sign In
-    </a>
-    <!-- SHOULD BE THE BUTTON BELOW -->
-    <!-- <button className="sign-in-button">Sign In</button> -->
-    <!-- -->
-   </form>
-  </section>
- </main>
- <footer className="footer">
-  <p className="footer-text">
-   Copyright 2020 Argent Bank
-  </p>
- </footer>
- <script>
- </script>
-</body>
+			<nav className="main-nav">
+				<Link className="main-nav-logo" to="/">
+					<img className="main-nav-logo-image" src={logo} alt="Argent Bank Logo" />
+					<h1 className="sr-only">Argent Bank</h1>
+				</Link>
+			</nav>
 
+			<main className="main bg-dark">
+				<section className="sign-in-content">
+					<i className="fa fa-user-circle sign-in-icon"></i>
+					<h1>Sign In</h1>
+					<form onSubmit={handleSubmit}>
+						<div className="input-wrapper">
+							<label htmlFor="username">Username</label>
+							<input
+								type="text"
+								id="username"
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+								required
+							/>
+						</div>
+						<div className="input-wrapper">
+							<label htmlFor="password">Password</label>
+							<input
+								type="password"
+								id="password"
+								value={password}
+								onChange={(e) => setPassword(e.target.value)}
+								required
+							/>
+						</div>
+						<div className="input-remember">
+							<input type="checkbox" id="remember-me" />
+							<label htmlFor="remember-me">Remember me</label>
+						</div>
+						{status === "failed" && <p className="error">{error}</p>}
+						<button className="sign-in-button" type="submit">
+							Sign In
+						</button>
+					</form>
+				</section>
+			</main>
+
+			<footer className="footer">
+				<p className="footer-text">Copyright 2020 Argent Bank</p>
+			</footer>
 		</>
 	);
 }
