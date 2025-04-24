@@ -50,3 +50,4 @@ export async function getUserProfileRequest(token)
 	const data = await response.json();
 	return data.body;
 }
+

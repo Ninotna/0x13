@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { loginRequest, getUserProfileRequest } from "../services/authService";
+import { loginRequest, getUserProfileRequest } from "../../services/authService";
 
 /**
  * Thunk – Connexion utilisateur (récupération du token)

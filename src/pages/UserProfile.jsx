@@ -1,5 +1,8 @@
 import React from "react";
 import "../styles/main.css";
+import { logout } from "../redux/slices/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate, Link } from "react-router-dom";
 
 /**
  * Page de profil utilisateur ArgentBank
@@ -8,6 +11,14 @@ import "../styles/main.css";
  */
 function UserProfile()
 {
+        const dispatch = useDispatch();
+        const auth = useSelector((state) => state.auth);
+        console.log(auth);
+        const navigate = useNavigate();
+       if (auth.user === null) {
+         navigate("/");
+         return null;
+       }
 	return (
 		<>
 <body>
@@ -24,6 +35,12 @@ function UserProfile()
     </i>
     Tony
    </a>
+   <button onClick={() => {
+    console.log("hello");
+    dispatch(logout());
+    navigate("/");
+   }
+    }>Sign Out</button>
    <a className="main-nav-item" href="./index.html">
     <i className="fa fa-sign-out">
     </i>
