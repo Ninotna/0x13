@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "../styles/main.css";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { updateUserProfile, getUserProfile } from "../redux/slices/authSlice";
+import { updateUserProfile, getUserProfile, logout } from "../redux/slices/authSlice";
 
 function UserProfile()
 {
@@ -21,7 +21,8 @@ function UserProfile()
 	useEffect(() =>
 	{
 		if (!auth.token) {
-			navigate("/sign-in");
+			// navigate("/login");
+			navigate("/")
 		} else if (!user) {
 			dispatch(getUserProfile());
 		}
@@ -53,6 +54,13 @@ function UserProfile()
 		setIsEditing(false);
 	};
 
+	const handleLogout = () =>
+{
+	dispatch(logout());
+	navigate("/login");
+};
+
+
 	return (
 		<>
 		<main className="main bg-dark">
@@ -65,6 +73,9 @@ function UserProfile()
 				<button className="edit-button" onClick={handleEditToggle}>
 					Edit Name
 				</button>
+				<button className="logout-button" onClick={handleLogout}>
+	Log Out
+</button>
 			</div>
 			{isEditing && (
 				<div className="edit-form">

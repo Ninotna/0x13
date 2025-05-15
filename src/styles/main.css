@@ -63,6 +63,7 @@ body {
 .main-nav-logo {
   display: flex;
   align-items: center;
+  justify-content: space-around;
 }
 
 .main-nav-logo-image {
@@ -289,3 +290,13 @@ body {
     width: 200px;
   }
 }
+
+.logout-button {
+	background: transparent;
+	color: white;
+	border: 1px solid white;
+	padding: 5px 10px;
+	cursor: pointer;
+	margin-left: 1rem;
+}
+

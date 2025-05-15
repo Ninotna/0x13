@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { loginUser, getUserProfile } from "../redux/slices/authSlice";
-import { useNavigate } from "react-router-dom";
-
+import { useNavigate, Link } from "react-router-dom";
 import "../styles/main.css";
 import logo from "../assets/img/argentBankLogo.png";
 
@@ -36,7 +35,16 @@ function SignIn()
 
 	return (
 		<main className="main bg-dark">
+
 			<section className="sign-in-content">
+											<Link className="main-nav-logo" to="/">
+					<img
+						alt="Argent Bank Logo"
+						className="main-nav-logo-image"
+						src={logo}
+					/>
+					<h1 className="sr-only">Argent Bank</h1>
+				</Link>
 				<i className="fa fa-user-circle sign-in-icon"></i>
 				<h1>Sign In</h1>
 				<form onSubmit={handleSubmit}>
