@@ -4,9 +4,6 @@ import { useStore, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { getUserProfile } from "../services/authService";
 
-import { useDispatch } from "react-redux";
-import { updateUserProfile } from "../../redux/slices/authSlice";
-
 function UserProfile()
 {
 	const store = useStore();

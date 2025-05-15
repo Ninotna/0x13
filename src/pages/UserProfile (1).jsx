@@ -7,6 +7,8 @@ import { getUserProfile } from "../services/authService";
 import { useDispatch } from "react-redux";
 import { updateUserProfile } from "../../redux/slices/authSlice";
 
+
+
 function UserProfile()
 {
 	const store = useStore();
@@ -14,6 +16,8 @@ function UserProfile()
 
 	const auth = useSelector((state) => state.auth);
 	const user = auth.user;
+
+	const dispatch = useDispatch();
 
 	const [isEditing, setIsEditing] = useState(false);
 	const [editedProfile, setEditedProfile] = useState({
@@ -26,9 +30,10 @@ function UserProfile()
 		if (!auth.token) {
 			navigate("/sign-in");
 		} else if (!user) {
-			getUserProfile(store); /* Remplace l'appel direct */
+	dispatch(getUserProfile());
+
 		}
-	}, [auth.token, user, navigate, store]);
+	}, [auth.token, user, navigate, store, dispatch]);
 
 	useEffect(() =>
 	{
@@ -47,11 +52,15 @@ function UserProfile()
 		setEditedProfile({ ...editedProfile, [e.target.name]: e.target.value });
 	};
 
-	const handleSave = () =>
-	{
-		// TODO: à implémenter plus tard (updateUserProfile via service + store)
-		setIsEditing(false);
-	};
+const handleSave = () =>
+{
+	dispatch(updateUserProfile({
+		firstName: editedProfile.firstName,
+		lastName: editedProfile.lastName
+	}));
+	setIsEditing(false);
+};
+
 
 	return (
 		<>
