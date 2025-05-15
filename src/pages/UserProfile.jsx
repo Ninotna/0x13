@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "../styles/main.css";
-import { useStore, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { getUserProfile } from "../services/authService";
-
-import { useDispatch } from "react-redux";
-import { updateUserProfile } from "../../redux/slices/authSlice";
+import { updateUserProfile, getUserProfile } from "../redux/slices/authSlice";
 
 function UserProfile()
 {
-	const store = useStore();
+	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	const auth = useSelector((state) => state.auth);
@@ -26,9 +23,9 @@ function UserProfile()
 		if (!auth.token) {
 			navigate("/sign-in");
 		} else if (!user) {
-			getUserProfile(store); /* Remplace l'appel direct */
+			dispatch(getUserProfile());
 		}
-	}, [auth.token, user, navigate, store]);
+	}, [auth.token, user, navigate, dispatch]);
 
 	useEffect(() =>
 	{
@@ -49,7 +46,10 @@ function UserProfile()
 
 	const handleSave = () =>
 	{
-		// TODO: à implémenter plus tard (updateUserProfile via service + store)
+		dispatch(updateUserProfile({
+			firstName: editedProfile.firstName,
+			lastName: editedProfile.lastName
+		}));
 		setIsEditing(false);
 	};
 
@@ -81,25 +81,25 @@ function UserProfile()
 						onChange={handleChange}
 					/>
 					<button onClick={handleSave}>Save</button>
+					<button onClick={handleEditToggle}>Cancel</button>
 				</div>
 			)}
-			 <h2 className="sr-only">Accounts</h2>
-                    {/* Sections des comptes bancaires */}
-                    <section className="account">
-                        <div className="account-content-wrapper">
-                            <h3 className="account-title">Argent Bank Checking (x8349)</h3>
-                            <p className="account-amount">$2,082.79</p>
-                            <p className="account-amount-description">Available Balance</p>
-                        </div>
-                        <div className="account-content-wrapper cta">
-                            <button className="transaction-button">View transactions</button>
-                        </div>
-                    </section>
+			<h2 className="sr-only">Accounts</h2>
+			<section className="account">
+				<div className="account-content-wrapper">
+					<h3 className="account-title">Argent Bank Checking (x8349)</h3>
+					<p className="account-amount">$2,082.79</p>
+					<p className="account-amount-description">Available Balance</p>
+				</div>
+				<div className="account-content-wrapper cta">
+					<button className="transaction-button">View transactions</button>
+				</div>
+			</section>
 		</main>
-		                <footer className="footer">
-						<p className="footer-text">Copyright 2020 Argent Bank</p>
-					</footer>
-			</>
+		<footer className="footer">
+			<p className="footer-text">Copyright 2020 Argent Bank</p>
+		</footer>
+		</>
 	);
 }
 
