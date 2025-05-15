@@ -1,0 +1,21 @@
+@mixin flex($direction, $justify, $align, $gap) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-items: $align;
+  gap: $gap;
+}
+
+@mixin btn() {
+  width: 100%;
+  height: 4rem;
+  padding: 0 1rem;
+  font-size:clamp(1.6rem, 1.6vw, 1.8rem);
+  border: none;
+  background-color: $color-green;
+  cursor: pointer;
+  color: $color-light;
+  &:hover {
+    text-decoration: underline;
+  }
+}
