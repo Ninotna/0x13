@@ -56,8 +56,8 @@ const authSlice = createSlice({
       state.isAuthenticated = false;
       state.status = 'idle';
       state.error = null;
-      localStorage.removeItem('token');
-      localStorage.removeItem('user');
+      // localStorage.removeItem('token');
+      // localStorage.removeItem('user');
     }
   },
   extraReducers: (builder) => {
@@ -69,7 +69,7 @@ const authSlice = createSlice({
         state.token = action.payload.token;
         state.isAuthenticated = true;
         state.status = 'succeeded';
-        localStorage.setItem('token', action.payload.token);
+        // localStorage.setItem('token', action.payload.token);
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.status = 'failed';
@@ -77,12 +77,12 @@ const authSlice = createSlice({
       })
       .addCase(getUserProfile.fulfilled, (state, action) => {
         state.user = action.payload;
-        localStorage.setItem('user', JSON.stringify(action.payload));
+        // localStorage.setItem('user', JSON.stringify(action.payload));
       })
       .addCase(updateUserProfile.fulfilled, (state, action) => {
         state.user.firstName = action.payload.firstName;
         state.user.lastName = action.payload.lastName;
-        localStorage.setItem('user', JSON.stringify(state.user));
+        // localStorage.setItem('user', JSON.stringify(state.user));
       });
   }
 });
