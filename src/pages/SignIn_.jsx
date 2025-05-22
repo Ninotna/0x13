@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser, getUserProfile } from '../redux/slices/authSlice';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import '../styles/main.css';
+import logo from '../assets/img/argentBankLogo.png';
 import Header from '../components/Header';
 
+/**
+ * Page de connexion utilisateur
+ */
 function SignIn() {
   const navigate = useNavigate();
 
@@ -12,7 +16,6 @@ function SignIn() {
   const [password, setPassword] = useState('');
   const [remember, setRemember] = useState(false);
   const dispatch = useDispatch();
-
   const { isAuthenticated, status, error } = useSelector((state) => state.auth);
 
   useEffect(() => {
@@ -64,20 +67,13 @@ function SignIn() {
               />
               <label htmlFor="remember-me">Remember me</label>
             </div>
-            {status === 'failed' && (
-              <p className="error" style={{ color: 'red', marginBottom: '1rem' }}>
-                {error}
-              </p>
-            )}
+            {status === 'failed' && <p className="error">{error}</p>}
             <button className="sign-in-button" type="submit">
               Sign In
             </button>
           </form>
         </section>
       </main>
-      <footer className="footer">
-        <p className="footer-text">Copyright 2020 Argent Bank</p>
-      </footer>
     </>
   );
 }

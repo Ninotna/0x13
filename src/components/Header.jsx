@@ -6,6 +6,8 @@ import logo from '../assets/img/argentBankLogo.png';
 import chatIcon from '../assets/img/icon-chat.png';
 import moneyIcon from '../assets/img/icon-money.png';
 import securityIcon from '../assets/img/icon-security.png';
+import iconUser from '../assets/img/icon-user.svg';
+import iconLogout from '../assets/img/icon-logout.svg';
 
 function Header() {
   const auth = useSelector((state) => state.auth);
@@ -23,21 +25,18 @@ function Header() {
       </Link>
       <div>
         {auth.isAuthenticated && auth.user ? (
-          <>
+          <div className="main-nav-user">
             <Link className="main-nav-item" to="/profile">
-              <i className="fa fa-user-circle"></i>
+              <i class="fa fa-user-circle"></i>
               {auth.user.firstName}
             </Link>
-            <button
-              onClick={handleLogout}
-              className="main-nav-item"
-              style={{ background: 'none', border: 'none', cursor: 'pointer' }}
-            >
-              <i className="fa fa-sign-out"></i> Sign Out
+            <button className="main-nav-item logout-button" onClick={handleLogout}>
+              <i class="fa fa-sign-out"></i>
+              <span>Sign out</span>
             </button>
-          </>
+          </div>
         ) : (
-          <Link className="main-nav-item" to="/sign-in">
+          <Link className="main-nav-item" to="/login">
             <i className="fa fa-user-circle"></i>
             Sign In
           </Link>
