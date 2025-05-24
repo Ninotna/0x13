@@ -1,75 +1,124 @@
-# 💳 Projet ArgentBank
+# 💳 ArgentBank — Application bancaire front-end
 
-Application front-end React pour la visualisation des comptes utilisateurs d'une banque fictive.
+[![Licence](https://img.shields.io/badge/Licence-MIT-blue.svg)](LICENSE)
+[![React](https://img.shields.io/badge/React-18+-61DAFB?logo=react)](https://reactjs.org)
+[![Redux Toolkit](https://img.shields.io/badge/Redux--Toolkit-enabled-purple?logo=redux)](https://redux-toolkit.js.org)
+
+Application React pour une plateforme bancaire fictive. Elle permet l’authentification des utilisateurs, la consultation de leurs comptes et la gestion de leurs transactions. Ce projet a été réalisé dans le cadre du parcours **Développeur d'application JavaScript** chez OpenClassrooms.
+
+---
+
+## 📚 Sommaire
+
+- [🚀 Démarrer le projet](#-démarrer-le-projet)
+- [📁 Structure du projet](#-structure-du-projet)
+- [🛠 Stack technique](#-stack-technique)
+- [✅ Fonctionnalités](#-fonctionnalités)
+- [📘 Documentation API (Swagger)](#-documentation-api-swagger)
+- [📦 Utilisation de Makefile](#-utilisation-de-makefile)
+- [📝 Licence](#-licence)
+
+---
 
 ## 🚀 Démarrer le projet
 
-### Prérequis
-
-- Node.js >= 16.x
-- npm ou yarn
-
-### Installation
-
 ```bash
 npm install
-```
-
-### Lancement en développement
-
-```bash
 npm run dev
 ```
 
-### Variables d’environnement
+Créer un fichier `.env` si nécessaire :
 
-Créer un fichier `.env` :
-
-```bash
+```env
 REACT_APP_API_URL=http://localhost:3001/api/v1
 ```
+
+---
 
 ## 📁 Structure du projet
 
 ```
 src/
-├── components/     # Composants réutilisables (UI, cartes, boutons)
-├── pages/          # Pages principales (SignIn, Profile, etc.)
-├── redux/          # Store global + slices
-├── services/       # Fonctions d'appel API
-├── utils/          # Fonctions utilitaires (validation, token, etc.)
-├── styles/         # CSS ou Tailwind
-├── assets/         # Images, logos
+├── components/
+│   ├── Header.jsx
+│   └── account/
+│       ├── Account.jsx
+│       └── items/Items.jsx
+├── pages/
+│   ├── Home.jsx
+│   ├── SignIn.jsx
+│   └── UserProfile.jsx
+├── redux/
+│   ├── store.js
+│   ├── slices/authSlice.js
+│   └── services/authService.js
+├── styles/
+│   ├── main.css
+│   ├── main_.css
+│   ├── App.css
+│   └── index.css
+├── assets/              # (à compléter si nécessaire)
+└── utils/               # (répertoire détecté dans les dépendances, à confirmer)
 ```
+
+---
 
 ## 🛠 Stack technique
 
-- React
+- React 18
 - Redux Toolkit
-- React Router
-- PropTypes
-- JSDoc
-- Tailwind CSS (ou CSS classique)
-- ESLint / Prettier
-- Jest + Testing Library
+- React Router DOM
+- CSS Modules / organisation manuelle
+- JSDoc + PropTypes (à intégrer si non existants)
+- ESLint
+- Swagger YAML (API backend)
+- Makefile (gestion simplifiée des scripts)
 
-## ✅ Fonctionnalités clés
+---
 
-- Authentification par token
-- Visualisation des comptes bancaires
-- Édition du profil utilisateur
-- Responsive design
-- Sécurité des routes
+## ✅ Fonctionnalités
 
-## 📦 Scripts utiles
+- Connexion via JWT
+- Récupération du profil utilisateur
+- Consultation des comptes bancaires
+- Affichage des transactions groupées par compte
+- Modification des transactions (catégorie, notes)
+- Responsive et accessible
+
+---
+
+## 📘 Documentation API (Swagger)
+
+La spécification API est disponible dans :
 
 ```bash
-npm run dev      # Mode développement
-npm run build    # Build production
-npm run lint     # Analyse ESLint
-npm test         # Tests unitaires
+doc-api/swagger.yaml
 ```
+
+Pour la visualiser :
+
+1. Aller sur [https://editor.swagger.io](https://editor.swagger.io)
+2. Importer le fichier YAML
+3. Tester les endpoints en direct
+
+---
+
+## 📦 Utilisation de Makefile
+
+Si présent à la racine, le `Makefile` permet de lancer facilement les commandes suivantes :
+
+```bash
+make install       # npm install
+make dev           # npm run dev
+make build         # npm run build
+make lint          # npm run lint
+make test          # npm test
+make swagger       # docker swagger UI
+make clean         # suppression du dossier build
+```
+
+---
 
 ## 📝 Licence
 
-MIT – Utilisation libre à des fins d'apprentissage
+Ce projet est proposé sous licence MIT.
