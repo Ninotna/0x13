@@ -3,11 +3,6 @@ import { Link } from 'react-router-dom';
 import { useSelector, useStore } from 'react-redux';
 import { logout } from '../redux/slices/authSlice';
 import logo from '../assets/img/argentBankLogo.png';
-import chatIcon from '../assets/img/icon-chat.png';
-import moneyIcon from '../assets/img/icon-money.png';
-import securityIcon from '../assets/img/icon-security.png';
-import iconUser from '../assets/img/icon-user.svg';
-import iconLogout from '../assets/img/icon-logout.svg';
 
 function Header() {
   const auth = useSelector((state) => state.auth);

@@ -1,7 +1,4 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
 import '../styles/main.css';
-import logo from '../assets/img/argentBankLogo.png';
 import chatIcon from '../assets/img/icon-chat.png';
 import moneyIcon from '../assets/img/icon-money.png';
 import securityIcon from '../assets/img/icon-security.png';
@@ -20,9 +17,6 @@ function Home() {
   const auth = useSelector((state) => state.auth);
   const dispatch = useDispatch();
 
-  const handleLogout = () => {
-    dispatch(logout());
-  };
   return (
     <>
       <Header />
