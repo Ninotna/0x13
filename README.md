@@ -7,6 +7,20 @@
 Application React pour une plateforme bancaire fictive. Elle permet l’authentification des utilisateurs, la consultation de leurs comptes et la gestion de leurs transactions. Ce projet a été réalisé dans le cadre du parcours **Développeur d'application JavaScript** chez OpenClassrooms.
 
 ---
+## 📂 Présentation générale
+
+Cette application React, construite avec Vite et Redux Toolkit, constitue la partie front-end d'une plateforme bancaire fictive. Elle gère l'authentification via JWT, la récupération et la mise à jour du profil utilisateur, ainsi que l'affichage des comptes et transactions.
+
+Les dossiers principaux se trouvent dans `src/` :
+- `components/` pour les éléments d'interface comme `Header.jsx` ou les comptes.
+- `pages/` pour les écrans (`Home`, `SignIn`, `UserProfile`).
+- `redux/` pour la configuration du store, les slices et les appels API.
+- `styles/` pour les feuilles de style CSS.
+
+Les fichiers clés incluent `store.js`, `authSlice.js` et `authService.js` pour la logique Redux et les requêtes API.
+
+Pour progresser dans la compréhension du projet, explorez le fonctionnement des `async thunks` de Redux Toolkit, consultez la spécification Swagger fournie dans `doc-api`, et envisagez d'ajouter des tests unitaires.
+---
 
 ## 📚 Sommaire
 
